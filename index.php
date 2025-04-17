@@ -20,7 +20,17 @@ switch($request){
     case 'servicios':
             require_once './Controllers/ServiciosController.php';
             $controller = new ServiciosController();
-            $controller->listar();
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $controller->crear();
+            }elseif($_SERVER['REQUEST_METHOD'] == 'PUT'){
+                $controller->actualizar();
+            }elseif($_SERVER['REQUEST_METHOD'] == 'DELETE'){
+                $controller->eliminar();
+            }elseif($_SERVER['REQUEST_METHOD'] == 'GET'){
+                $controller->listar();
+            }else{
+                echo json_encode(array("error" => "Método no permitido."));
+            }
             break;
     case 'serviciosciudades':
         require_once './Controllers/ServiciosCiudadesController.php';

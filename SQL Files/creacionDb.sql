@@ -26,11 +26,7 @@ CREATE TABLE `Ciudades`(
 CREATE TABLE `ServiciosCiudades`(
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `idServicio` BIGINT UNSIGNED NOT NULL,
-    `idCiudad` BIGINT UNSIGNED NOT NULL
+    `idCiudad` BIGINT UNSIGNED NOT NULL,
+    CONSTRAINT `serviciosciudades_idservicio_foreign` FOREIGN KEY(`idServicio`) REFERENCES `Servicios`(`id`) ON DELETE CASCADE,
+    CONSTRAINT `serviciosciudades_idciudad_foreign` FOREIGN KEY(`idCiudad`) REFERENCES `Ciudades`(`id`) ON DELETE CASCADE
 );
-
-ALTER TABLE
-    `ServiciosCiudades` ADD CONSTRAINT `serviciosciudades_idservicio_foreign` FOREIGN KEY(`idServicio`) REFERENCES `Servicios`(`id`);
-
-ALTER TABLE
-    `ServiciosCiudades` ADD CONSTRAINT `serviciosciudades_idciudad_foreign` FOREIGN KEY(`idCiudad`) REFERENCES `Ciudades`(`id`);
